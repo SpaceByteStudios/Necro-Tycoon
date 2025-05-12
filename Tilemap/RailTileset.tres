@@ -1,0 +1,58 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dor1b4yhhvh4e"]
+
+[ext_resource type="Texture2D" uid="uid://c8pbvwxflxtxt" path="res://Tilemap/RailAtlas.png" id="1_gal50"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_euu37"]
+texture = ExtResource("1_gal50")
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/left_side = 0
+0:0/0/custom_data_0 = "Straight"
+0:0/0/custom_data_1 = PackedVector2Array(-1, 0, 1, 0)
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 0
+1:0/0/terrains_peering_bit/right_side = 0
+1:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0/custom_data_0 = "Curve"
+1:0/0/custom_data_1 = PackedVector2Array(0, 1, 1, 0)
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 0
+2:0/0/terrains_peering_bit/bottom_side = 0
+2:0/0/terrains_peering_bit/left_side = 0
+2:0/0/custom_data_0 = "Curve"
+2:0/0/custom_data_1 = PackedVector2Array(-1, 0, 0, 1)
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrain = 0
+0:1/0/terrains_peering_bit/bottom_side = 0
+0:1/0/terrains_peering_bit/top_side = 0
+0:1/0/custom_data_0 = "Straight"
+0:1/0/custom_data_1 = PackedVector2Array(0, -1, 0, 1)
+1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 0
+1:1/0/terrains_peering_bit/right_side = 0
+1:1/0/terrains_peering_bit/top_side = 0
+1:1/0/custom_data_0 = "Curve"
+1:1/0/custom_data_1 = PackedVector2Array(0, -1, 1, 0)
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrain = 0
+2:1/0/terrains_peering_bit/left_side = 0
+2:1/0/terrains_peering_bit/top_side = 0
+2:1/0/custom_data_0 = "Curve"
+2:1/0/custom_data_1 = PackedVector2Array(-1, 0, 0, -1)
+
+[resource]
+terrain_set_0/mode = 2
+terrain_set_0/terrain_0/name = "Rails"
+terrain_set_0/terrain_0/color = Color(1, 1, 0, 1)
+custom_data_layer_0/name = "Type"
+custom_data_layer_0/type = 4
+custom_data_layer_1/name = "Direction"
+custom_data_layer_1/type = 35
+sources/0 = SubResource("TileSetAtlasSource_euu37")
