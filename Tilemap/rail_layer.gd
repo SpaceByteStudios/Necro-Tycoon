@@ -22,6 +22,7 @@ func get_start_end_point(map_pos, direction):
 	
 	var start_point : Vector2
 	var end_points : Array[Vector2]
+	var new_dir : Vector2
 	var points : Array[Vector2]
 	
 	for dir in directions:
@@ -32,9 +33,11 @@ func get_start_end_point(map_pos, direction):
 			start_point = Vector2(dir_pos)
 		else:
 			end_points.append(Vector2(dir_pos))
+			new_dir = dir
 	
 	points.append(start_point)
 	points.append_array(end_points)
+	points.append(new_dir)
 	
 	return points
 

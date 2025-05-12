@@ -1,12 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://37pib8qb4y8e"]
+[gd_scene load_steps=7 format=4 uid="uid://37pib8qb4y8e"]
 
 [ext_resource type="TileSet" uid="uid://myg3ljvpc1hb" path="res://Tilemap/MapTileset.tres" id="1_onf2v"]
 [ext_resource type="TileSet" uid="uid://dor1b4yhhvh4e" path="res://Tilemap/RailTileset.tres" id="2_6ynty"]
 [ext_resource type="Script" uid="uid://dfq32n8dsdahu" path="res://Tilemap/rail_layer.gd" id="3_5b1ro"]
-[ext_resource type="Script" uid="uid://bx2k42tb4g54b" path="res://Train/train.gd" id="3_wo00q"]
-[ext_resource type="Script" uid="uid://jsexxtfb6gwf" path="res://Train/train_car.gd" id="5_ecvex"]
-[ext_resource type="Texture2D" uid="uid://bim0gaefuv3hq" path="res://Train/Engine.png" id="5_wo00q"]
-[ext_resource type="Texture2D" uid="uid://2wwl6c7gw6bi" path="res://Train/Wagon.png" id="6_5b1ro"]
+[ext_resource type="Texture2D" uid="uid://72e3mr8cnl6y" path="res://Train/Train.png" id="3_e2ns8"]
+[ext_resource type="Script" uid="uid://br8xyavvo128e" path="res://Train/train.gd" id="3_wo00q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ynty"]
 size = Vector2(16, 10)
@@ -20,66 +18,20 @@ tile_map_data = PackedByteArray("AAAKAAcAAAAAAAAAAAALAAcAAAAAAAAAAAAMAAcAAAAAAAA
 tile_set = ExtResource("1_onf2v")
 
 [node name="RailLayer" type="TileMapLayer" parent="Map"]
-tile_map_data = PackedByteArray("AAAMAAsAAAACAAAAAAAMAAwAAAAAAAEAAAAMAA0AAAAAAAEAAAAMAA4AAAAAAAEAAAAMAA8AAAAAAAEAAAAMABAAAAAAAAEAAAAMABEAAAACAAEAAAALABEAAAAAAAAAAAAKABEAAAAAAAAAAAAJABEAAAAAAAAAAAAIABEAAAAAAAAAAAAHABEAAAAAAAAAAAAGABEAAAABAAEAAAAQABEAAAABAAEAAAAQABAAAAAAAAEAAAAQAAwAAAAAAAEAAAAQAAsAAAABAAAAAAARAAsAAAAAAAAAAAARABEAAAAAAAAAAAASABEAAAAAAAAAAAATABEAAAAAAAAAAAAUABEAAAAAAAAAAAAVABEAAAAAAAAAAAAWAAsAAAACAAAAAAAVAAsAAAAAAAAAAAAGABAAAAABAAAAAAAHABAAAAACAAEAAAALAAsAAAABAAAAAAALAAwAAAACAAEAAAAKAAwAAAABAAAAAAAKAA0AAAACAAEAAAAJAA0AAAABAAAAAAAJAA4AAAACAAEAAAAIAA4AAAABAAAAAAAIAA8AAAACAAEAAAAHAA8AAAABAAAAAAAXABEAAAAAAAAAAAAWABEAAAAAAAAAAAAbABEAAAAAAAAAAAAcABEAAAAAAAAAAAAdABEAAAAAAAAAAAAeABEAAAAAAAAAAAAfABEAAAAAAAAAAAAgABEAAAAAAAAAAAAhABEAAAACAAEAAAAhABAAAAAAAAEAAAAhAA8AAAAAAAEAAAAhAA4AAAAAAAEAAAAhAA0AAAACAAAAAAAgAA0AAAAAAAAAAAAfAA0AAAABAAEAAAAZAA0AAAAAAAAAAAAYAA0AAAAAAAAAAAAXAA0AAAAAAAAAAAAWAA0AAAABAAEAAAAWAAwAAAAAAAEAAAAfAAwAAAAAAAEAAAAfAAsAAAAAAAEAAAAfAAoAAAACAAAAAAAeAAoAAAAAAAAAAAAdAAoAAAAAAAAAAAAcAAoAAAABAAEAAAAcAAkAAAAAAAEAAAAcAAgAAAACAAAAAAAbAAgAAAAAAAAAAAAaAAgAAAABAAAAAAAaAAkAAAAAAAEAAAAaAAoAAAAAAAEAAAAaAAsAAAAAAAEAAAAaAAwAAAAAAAEAAAAaAA0AAAACAAEAAAAUAAsAAAABAAEAAAAUAAoAAAAAAAEAAAAUAAkAAAACAAAAAAATAAkAAAAAAAAAAAASAAkAAAABAAAAAAASAAoAAAAAAAEAAAASAAsAAAACAAEAAAAQAA8AAAABAAAAAAARAA8AAAAAAAAAAAASAA8AAAAAAAAAAAATAA8AAAACAAEAAAATAA4AAAAAAAEAAAATAA0AAAACAAAAAAASAA0AAAAAAAAAAAARAA0AAAAAAAAAAAAQAA0AAAABAAEAAAAYABEAAAACAAEAAAAYABAAAAAAAAEAAAAYAA8AAAABAAAAAAAZAA8AAAAAAAAAAAAaABAAAAAAAAEAAAAaABEAAAABAAEAAAAaAA8AAAACAAAAAAA=")
+tile_map_data = PackedByteArray("AAAGAAcAAAAAAAAAAAAHAAcAAAAAAAAAAAAIAAcAAAAAAAAAAAAKAAcAAAACAAAAAAAJAA0AAAAAAAAAAAAIAA0AAAAAAAAAAAAEAA0AAAAAAAAAAAACAA0AAAABAAEAAAABAAoAAAABAAAAAAAFAAcAAAABAAAAAAABAAwAAAABAAEAAAABAAsAAAAAAAEAAAAFAAkAAAAAAAEAAAAFAAgAAAAAAAEAAAACAAoAAAAAAAAAAAADAAoAAAAAAAAAAAAJAAcAAAAAAAAAAAAKAAgAAAAAAAEAAAAKAAkAAAAAAAEAAAADAA0AAAAAAAAAAAAKAAwAAAAAAAEAAAAKAAsAAAAAAAEAAAAKAAoAAAAAAAEAAAAKAA0AAAACAAEAAAAHAA0AAAABAAAAAAAHAA4AAAACAAEAAAAGAA4AAAAAAAAAAAAFAA4AAAABAAEAAAAFAA0AAAACAAAAAAACAAwAAAACAAAAAAAEAAoAAAAAAAAAAAAFAAoAAAACAAEAAAA=")
 tile_set = ExtResource("2_6ynty")
 script = ExtResource("3_5b1ro")
 
-[node name="Train" type="Node2D" parent="." node_paths=PackedStringArray("rail_layer")]
-position = Vector2(344, 280)
+[node name="Train" type="CharacterBody2D" parent="." node_paths=PackedStringArray("rail_layer")]
+position = Vector2(104, 120)
 script = ExtResource("3_wo00q")
 rail_layer = NodePath("../Map/RailLayer")
-train_speed = 64.0
-acceleration = 128.0
-start_dir = "Right"
 
-[node name="Engine" type="CharacterBody2D" parent="Train"]
-script = ExtResource("5_ecvex")
-
-[node name="TrainCollision" type="CollisionShape2D" parent="Train/Engine"]
+[node name="TrainCollision" type="CollisionShape2D" parent="Train"]
 shape = SubResource("RectangleShape2D_6ynty")
 
-[node name="TrainSprite" type="Sprite2D" parent="Train/Engine"]
-texture = ExtResource("5_wo00q")
-
-[node name="Wagon" type="CharacterBody2D" parent="Train"]
-position = Vector2(-16, 0)
-script = ExtResource("5_ecvex")
-
-[node name="WagonCollision" type="CollisionShape2D" parent="Train/Wagon"]
-shape = SubResource("RectangleShape2D_6ynty")
-
-[node name="WagonSprite" type="Sprite2D" parent="Train/Wagon"]
-texture = ExtResource("6_5b1ro")
-
-[node name="Wagon2" type="CharacterBody2D" parent="Train"]
-position = Vector2(-32, 0)
-script = ExtResource("5_ecvex")
-
-[node name="WagonCollision" type="CollisionShape2D" parent="Train/Wagon2"]
-shape = SubResource("RectangleShape2D_6ynty")
-
-[node name="WagonSprite" type="Sprite2D" parent="Train/Wagon2"]
-texture = ExtResource("6_5b1ro")
-
-[node name="Wagon3" type="CharacterBody2D" parent="Train"]
-position = Vector2(-48, 0)
-script = ExtResource("5_ecvex")
-
-[node name="WagonCollision" type="CollisionShape2D" parent="Train/Wagon3"]
-shape = SubResource("RectangleShape2D_6ynty")
-
-[node name="WagonSprite" type="Sprite2D" parent="Train/Wagon3"]
-texture = ExtResource("6_5b1ro")
-
-[node name="Wagon4" type="CharacterBody2D" parent="Train"]
-position = Vector2(-64, 0)
-script = ExtResource("5_ecvex")
-
-[node name="WagonCollision" type="CollisionShape2D" parent="Train/Wagon4"]
-shape = SubResource("RectangleShape2D_6ynty")
-
-[node name="WagonSprite" type="Sprite2D" parent="Train/Wagon4"]
-texture = ExtResource("6_5b1ro")
+[node name="TrainSprite" type="Sprite2D" parent="Train"]
+texture = ExtResource("3_e2ns8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
