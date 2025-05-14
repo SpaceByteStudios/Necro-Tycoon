@@ -36,32 +36,32 @@ func _ready() -> void:
 	engine.current_dir = direction
 	engine.setup_wagon()
 	
-	var wagon_dir : Vector2i = direction
-	var wagon_back_dir : Vector2i
+	var wagon_dir = engine.current_dir
 	var wagon_global_pos = engine.global_position
+	print(wagon_global_pos)
+	print(rail_layer.get_map_pos(wagon_global_pos))
 	for i in wagon_amount:
 		var wagon : TrainWagon = wagon_scene.instantiate()
 		
+		wagon_global_pos -= wagon_dir * 15.99
+		
+		print(wagon_global_pos)
+		
 		var wagon_map_pos = rail_layer.get_map_pos(wagon_global_pos)
-		wagon_back_dir = rail_layer.get_backward_direction(wagon_map_pos, wagon_dir)
 		
-		wagon_global_pos += wagon_back_dir * 16.0
-		
-		print("Wagon: " + str(i + 1))
 		print(wagon_map_pos)
-		print(wagon_dir)
-		print(wagon_back_dir)
+		
+		if rail_layer.get_rail_type(wagon_map_pos) != "Straight":
+			break
 		
 		add_child(wagon)
 		move_child(wagon, 0)
 		
 		wagon.global_position = wagon_global_pos
 		wagon.rail_layer = rail_layer
-		wagon.current_dir = -wagon_back_dir
+		wagon.current_dir = direction
 		
 		wagon.setup_wagon()
-		
-		wagon_dir = wagon.current_dir
 
 func _process(delta: float) -> void:
 	current_speed += acceleration * get_process_delta_time()
