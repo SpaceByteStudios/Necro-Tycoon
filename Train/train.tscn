@@ -9,7 +9,7 @@
 size = Vector2(16, 10)
 
 [sub_resource type="Curve" id="Curve_ye6r3"]
-_data = [Vector2(0.512315, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_hoj1j"]
@@ -50,8 +50,7 @@ shape = SubResource("RectangleShape2D_6ynty")
 texture = ExtResource("3_ftc4i")
 
 [node name="SmokeParticles" type="GPUParticles2D" parent="Engine"]
-amount = 6
+emitting = false
 texture = ExtResource("4_ye6r3")
 lifetime = 2.0
-explosiveness = 0.3
 process_material = SubResource("ParticleProcessMaterial_ye6r3")
