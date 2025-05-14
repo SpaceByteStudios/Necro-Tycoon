@@ -1,6 +1,7 @@
 extends Node2D
 class_name Train
 
+@onready var engine = $Engine
 @onready var wagon_scene = preload('res://Train/wagon.tscn')
 
 @export var rail_layer : RailManager
@@ -10,8 +11,6 @@ class_name Train
 
 @export_enum("Left", "Right", "Up", "Down")
 var start_dir : String
-
-var engine : TrainWagon
 
 var direction : Vector2i
 var current_speed : float
@@ -31,7 +30,6 @@ func _ready() -> void:
 		"Down":
 			direction = Vector2i.DOWN
 	
-	engine = get_child(0)
 	engine.rail_layer = rail_layer
 	engine.current_dir = direction
 	engine.setup_wagon()
@@ -73,8 +71,10 @@ func _process(delta: float) -> void:
 	if progress_t >= 1.0:
 		progress_t = 0.0
 		traveled_dist = 0.0
-		for train_car : TrainWagon in get_children():
-			train_car.start_next_rail()
+		for child in get_children():
+			if child is TrainWagon:
+				child.start_next_rail()
 	
-	for train_car : TrainWagon in get_children():
-			train_car.set_progress(progress_t)
+	for child in get_children():
+		if child is TrainWagon:
+			child.set_progress(progress_t)

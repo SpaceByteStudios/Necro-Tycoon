@@ -1,11 +1,37 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6nthqgbgycbv"]
+[gd_scene load_steps=11 format=3 uid="uid://c6nthqgbgycbv"]
 
 [ext_resource type="Script" uid="uid://bx2k42tb4g54b" path="res://Train/train.gd" id="1_ye6r3"]
 [ext_resource type="Script" uid="uid://jsexxtfb6gwf" path="res://Train/train_wagon.gd" id="2_hoj1j"]
 [ext_resource type="Texture2D" uid="uid://bim0gaefuv3hq" path="res://Train/Engine.png" id="3_ftc4i"]
+[ext_resource type="Texture2D" uid="uid://c3f4qa8al0ul8" path="res://Train/Smoke.png" id="4_ye6r3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ynty"]
 size = Vector2(16, 10)
+
+[sub_resource type="Curve" id="Curve_ye6r3"]
+_data = [Vector2(0.512315, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hoj1j"]
+curve = SubResource("Curve_ye6r3")
+
+[sub_resource type="Curve" id="Curve_ftc4i"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.100985, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_504xh"]
+curve = SubResource("Curve_ftc4i")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ye6r3"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 360.0
+angular_velocity_min = -20.0
+angular_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.7
+scale_curve = SubResource("CurveTexture_504xh")
+alpha_curve = SubResource("CurveTexture_hoj1j")
 
 [node name="Train" type="Node2D"]
 script = ExtResource("1_ye6r3")
@@ -22,3 +48,10 @@ shape = SubResource("RectangleShape2D_6ynty")
 
 [node name="TrainSprite" type="Sprite2D" parent="Engine"]
 texture = ExtResource("3_ftc4i")
+
+[node name="SmokeParticles" type="GPUParticles2D" parent="Engine"]
+amount = 6
+texture = ExtResource("4_ye6r3")
+lifetime = 2.0
+explosiveness = 0.3
+process_material = SubResource("ParticleProcessMaterial_ye6r3")
