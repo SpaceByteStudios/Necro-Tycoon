@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6nthqgbgycbv"]
+
+[ext_resource type="Script" uid="uid://bx2k42tb4g54b" path="res://Train/train.gd" id="1_ye6r3"]
+[ext_resource type="Script" uid="uid://jsexxtfb6gwf" path="res://Train/train_wagon.gd" id="2_hoj1j"]
+[ext_resource type="Texture2D" uid="uid://bim0gaefuv3hq" path="res://Train/Engine.png" id="3_ftc4i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ynty"]
+size = Vector2(16, 10)
+
+[node name="Train" type="Node2D"]
+script = ExtResource("1_ye6r3")
+wagon_amount = 4
+train_speed = 64.0
+acceleration = 128.0
+start_dir = "Right"
+
+[node name="Engine" type="CharacterBody2D" parent="."]
+script = ExtResource("2_hoj1j")
+
+[node name="TrainCollision" type="CollisionShape2D" parent="Engine"]
+shape = SubResource("RectangleShape2D_6ynty")
+
+[node name="TrainSprite" type="Sprite2D" parent="Engine"]
+texture = ExtResource("3_ftc4i")

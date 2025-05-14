@@ -19,10 +19,11 @@ tile_set = ExtResource("2_6ynty")
 script = ExtResource("3_5b1ro")
 
 [node name="Train" parent="." node_paths=PackedStringArray("rail_layer") instance=ExtResource("4_e2ns8")]
-position = Vector2(296, 280)
+position = Vector2(264, 280)
 rail_layer = NodePath("../Map/RailLayer")
 wagon_amount = 2
-start_dir = "Left"
+acceleration = 0.0
+start_dir = "Down"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0

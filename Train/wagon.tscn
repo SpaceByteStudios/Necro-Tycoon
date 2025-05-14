@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bf87p8y3hrk3r"]
+
+[ext_resource type="Script" uid="uid://jsexxtfb6gwf" path="res://Train/train_wagon.gd" id="1_4xi4t"]
+[ext_resource type="Texture2D" uid="uid://2wwl6c7gw6bi" path="res://Train/Wagon.png" id="2_yn8si"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ynty"]
+size = Vector2(16, 10)
+
+[node name="Wagon" type="CharacterBody2D"]
+script = ExtResource("1_4xi4t")
+
+[node name="WagonCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6ynty")
+
+[node name="WagonSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_yn8si")
