@@ -39,18 +39,11 @@ func _ready() -> void:
 	
 	var wagon_dir = engine.current_dir
 	var wagon_global_pos = engine.global_position
-	print(wagon_global_pos)
-	print(rail_layer.get_map_pos(wagon_global_pos))
 	for i in wagon_amount:
 		var wagon : TrainWagon = wagon_scene.instantiate()
 		
 		wagon_global_pos -= wagon_dir * 15.99
-		
-		print(wagon_global_pos)
-		
 		var wagon_map_pos = rail_layer.get_map_pos(wagon_global_pos)
-		
-		print(wagon_map_pos)
 		
 		if rail_layer.get_rail_type(wagon_map_pos) != "Straight":
 			break

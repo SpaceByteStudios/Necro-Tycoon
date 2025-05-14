@@ -9,15 +9,15 @@
 size = Vector2(16, 10)
 
 [sub_resource type="Curve" id="Curve_ye6r3"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.249493, 1), 0.0, 0.0, 0, 0, Vector2(0.604462, 0.19613), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_hoj1j"]
 curve = SubResource("Curve_ye6r3")
 
 [sub_resource type="Curve" id="Curve_ftc4i"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.100985, 1), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0953347, 0.750369), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_504xh"]
 curve = SubResource("Curve_ftc4i")
@@ -52,5 +52,5 @@ texture = ExtResource("3_ftc4i")
 [node name="SmokeParticles" type="GPUParticles2D" parent="Engine"]
 emitting = false
 texture = ExtResource("4_ye6r3")
-lifetime = 2.0
+lifetime = 1.5
 process_material = SubResource("ParticleProcessMaterial_ye6r3")
