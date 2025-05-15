@@ -1,16 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://c6nthqgbgycbv"]
+[gd_scene load_steps=12 format=3 uid="uid://c6nthqgbgycbv"]
 
 [ext_resource type="Script" uid="uid://bx2k42tb4g54b" path="res://Train/train.gd" id="1_ye6r3"]
 [ext_resource type="Script" uid="uid://jsexxtfb6gwf" path="res://Train/train_wagon.gd" id="2_hoj1j"]
 [ext_resource type="Texture2D" uid="uid://bim0gaefuv3hq" path="res://Train/Engine.png" id="3_ftc4i"]
+[ext_resource type="Script" uid="uid://b3hvylr72p31i" path="res://Train/train_hitbox.gd" id="3_hoj1j"]
 [ext_resource type="Texture2D" uid="uid://c3f4qa8al0ul8" path="res://Train/Smoke.png" id="4_ye6r3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ynty"]
 size = Vector2(16, 10)
 
 [sub_resource type="Curve" id="Curve_ye6r3"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.249493, 1), 0.0, 0.0, 0, 0, Vector2(0.604462, 0.19613), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.24924, 0.200696), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_hoj1j"]
 curve = SubResource("Curve_ye6r3")
@@ -29,7 +30,8 @@ angle_max = 360.0
 angular_velocity_min = -20.0
 angular_velocity_max = 20.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.7
+scale_min = 0.6
+scale_max = 0.8
 scale_curve = SubResource("CurveTexture_504xh")
 alpha_curve = SubResource("CurveTexture_hoj1j")
 
@@ -40,17 +42,27 @@ train_speed = 64.0
 acceleration = 128.0
 start_dir = "Right"
 
-[node name="Engine" type="CharacterBody2D" parent="."]
+[node name="Engine" type="Node2D" parent="."]
 script = ExtResource("2_hoj1j")
 
-[node name="TrainCollision" type="CollisionShape2D" parent="Engine"]
+[node name="Hitbox" type="Area2D" parent="Engine"]
+monitoring = false
+monitorable = false
+script = ExtResource("3_hoj1j")
+
+[node name="HitboxShape" type="CollisionShape2D" parent="Engine/Hitbox"]
 shape = SubResource("RectangleShape2D_6ynty")
 
 [node name="TrainSprite" type="Sprite2D" parent="Engine"]
 texture = ExtResource("3_ftc4i")
 
 [node name="SmokeParticles" type="GPUParticles2D" parent="Engine"]
+z_index = 1
 emitting = false
+amount = 32
 texture = ExtResource("4_ye6r3")
-lifetime = 1.5
+lifetime = 0.7
 process_material = SubResource("ParticleProcessMaterial_ye6r3")
+
+[connection signal="hitbox_entered" from="Engine" to="." method="_on_hitbox_entered"]
+[connection signal="area_entered" from="Engine/Hitbox" to="Engine" method="_on_hitbox_area_entered"]

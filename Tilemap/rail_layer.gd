@@ -18,6 +18,7 @@ func print_tile_info(map_pos):
 func get_start_end_point(map_pos, direction):
 	var tile_pos = map_to_local(map_pos)
 	var directions = get_directions(map_pos)
+	var rail_type = get_rail_type(map_pos)
 	
 	var start_point : Vector2
 	var end_points : Array[Vector2]
@@ -29,8 +30,10 @@ func get_start_end_point(map_pos, direction):
 		
 		if direction + Vector2i(dir) == Vector2i.ZERO:
 			start_point = Vector2(dir_pos)
-		else:
+		elif rail_type != "Crossing":
 			end_points.append(Vector2(dir_pos))
+		elif direction - Vector2i(dir) == Vector2i.ZERO:
+				end_points.append(Vector2(dir_pos))
 	
 	points.append(start_point)
 	points.append_array(end_points)
@@ -41,14 +44,14 @@ func get_forward_direction(map_pos, back_direction):
 	var directions = get_directions(map_pos)
 	
 	for dir in directions:
-		if back_direction + Vector2i(dir) != Vector2i.ZERO:
+		if back_direction + Vector2i(dir) == Vector2i.ZERO:
 			return Vector2i(dir)
 
-func get_backward_direction(map_pos, for_direction):
+func get_curve_direction(map_pos, back_direction):
 	var directions = get_directions(map_pos)
 	
 	for dir in directions:
-		if for_direction + Vector2i(dir) == Vector2i.ZERO:
+		if back_direction + Vector2i(dir) != Vector2i.ZERO:
 			return Vector2i(dir)
 
 func get_directions(map_pos):

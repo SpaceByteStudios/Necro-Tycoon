@@ -1,6 +1,9 @@
-extends CharacterBody2D
+extends Node2D
 class_name TrainWagon
 
+@onready var hitbox = $Hitbox
+
+var train_id : int = 0
 var rail_layer : RailManager
 
 var previous_dir : Vector2i
@@ -14,10 +17,14 @@ var rail_type : String
 
 var progress_amount : float
 
-func _process(delta: float) -> void:
+signal hitbox_entered
+
+func _process(_delta: float) -> void:
 	move_train()
 
-func setup_wagon():
+func setup_wagon(new_train_id):
+	train_id = new_train_id
+	hitbox.train_id = new_train_id
 	current_map_pos = rail_layer.get_map_pos(global_position)
 	start_rail(current_map_pos)
 
@@ -30,8 +37,10 @@ func start_rail(map_pos):
 	end_pos = points[1]
 	
 	previous_dir = current_dir
-	current_dir = rail_layer.get_forward_direction(current_map_pos, current_dir)
-	
+	if rail_type == "Straight" || rail_type == "Crossing":
+		current_dir = rail_layer.get_forward_direction(current_map_pos, -current_dir)
+	else:
+		current_dir = rail_layer.get_curve_direction(current_map_pos, current_dir)
 	global_position = start_pos
 
 func start_next_rail():
@@ -41,6 +50,8 @@ func start_next_rail():
 func move_train():
 	match rail_type:
 		"Straight":
+			linear_movement()
+		"Crossing":
 			linear_movement()
 		"Curve":
 			circular_movement()
@@ -73,7 +84,6 @@ func find_circle_center(p1, p2, radius, is_clockwise):
 	var midpoint = (p1 + p2) / 2.0
 	
 	var vec = p2 - p1
-	var vec_length = vec.length()
 	var perp = Vector2(-vec.y, vec.x).normalized()
 	
 	var h = radius * sqrt(2) / 2.0
@@ -90,3 +100,12 @@ func quadratic_bezier(p0, p1, p2, t):
 	var a = p0.lerp(p1, t)
 	var b = p1.lerp(p2, t)
 	return a.lerp(b, t)
+
+func enable_train_collision():
+	hitbox.monitoring = true
+	hitbox.monitorable = true
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	if area is TrainHitbox:
+		if area.train_id != train_id:
+			hitbox_entered.emit()
