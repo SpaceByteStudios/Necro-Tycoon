@@ -37,7 +37,7 @@ func start_rail(map_pos):
 	end_pos = points[1]
 	
 	previous_dir = current_dir
-	if rail_type == "Straight" || rail_type == "Crossing":
+	if rail_type != "Curve":
 		current_dir = rail_layer.get_forward_direction(current_map_pos, -current_dir)
 	else:
 		current_dir = rail_layer.get_curve_direction(current_map_pos, current_dir)
@@ -52,6 +52,8 @@ func move_train():
 		"Straight":
 			linear_movement()
 		"Crossing":
+			linear_movement()
+		"Station":
 			linear_movement()
 		"Curve":
 			circular_movement()

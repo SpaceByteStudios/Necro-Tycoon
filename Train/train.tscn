@@ -58,6 +58,7 @@ texture = ExtResource("3_ftc4i")
 
 [node name="SmokeParticles" type="GPUParticles2D" parent="Engine"]
 z_index = 1
+position = Vector2(-4, 0)
 emitting = false
 amount = 32
 texture = ExtResource("4_ye6r3")

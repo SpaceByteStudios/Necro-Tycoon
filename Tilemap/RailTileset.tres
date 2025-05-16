@@ -55,6 +55,12 @@ texture = ExtResource("1_gal50")
 3:0/0/terrains_peering_bit/top_side = 0
 3:0/0/custom_data_0 = "Crossing"
 3:0/0/custom_data_1 = PackedVector2Array(-1, 0, 1, 0, 0, -1, 0, 1)
+0:2/0 = 0
+0:2/0/custom_data_0 = "Station"
+0:2/0/custom_data_1 = PackedVector2Array(-1, 0, 1, 0)
+1:2/0 = 0
+1:2/0/custom_data_0 = "Station"
+1:2/0/custom_data_1 = PackedVector2Array(0, -1, 0, 1)
 
 [resource]
 terrain_set_0/mode = 2
