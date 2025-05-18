@@ -3,7 +3,8 @@ extends Node2D
 @onready var train_sprite = $Train
 @onready var wagons_sprite = $Wagons
 @onready var rail_sprite = $RailSprite
-@onready var station_sprite = $StationSprite
+@onready var station_vert_sprite = $StationVertSprite
+@onready var station_hori_sprite = $StationHoriSprite
 
 @onready var train_scene = preload('res://Train/train.tscn')
 
@@ -27,19 +28,17 @@ func _on_ui_button_toggled_off() -> void:
 	build_state = BuildState.NONE
 	train_sprite.modulate = Color(Color.WHITE, 0.0)
 	rail_sprite.modulate = Color(Color.WHITE, 0.0)
-	station_sprite.modulate = Color(Color.WHITE, 0.0)
+	station_vert_sprite.modulate = Color(Color.WHITE, 0.0)
+	station_hori_sprite.modulate = Color(Color.WHITE, 0.0)
 
 func _on_ui_train_button_pressed() -> void:
 	build_state = BuildState.TRAIN
-	train_sprite.modulate = Color(Color.WHITE, 0.8)
 
 func _on_ui_rail_button_pressed() -> void:
 	build_state = BuildState.RAIL
-	rail_sprite.modulate = Color(Color.WHITE, 0.8)
 
 func _on_ui_station_button_pressed() -> void:
 	build_state = BuildState.STATION
-	station_sprite.modulate = Color(Color.WHITE, 0.8)
 
 func _process(_delta: float) -> void:
 	match build_state:
@@ -55,6 +54,7 @@ func placing_train():
 	var tile_pos = rail_layer.map_to_local(map_pos)
 	var tile_data = rail_layer.get_cell_tile_data(map_pos)
 	
+	train_sprite.modulate = Color(Color.WHITE, 1.0)
 	train_sprite.global_position = tile_pos
 	wagons_sprite.global_position = tile_pos
 	
@@ -66,7 +66,7 @@ func placing_train():
 	if new_dir == Vector2i.ZERO:
 		return
 	
-	wagons_sprite.modulate = Color(Color.WHITE, 0.8)
+	wagons_sprite.modulate = Color(Color.WHITE, 1.0)
 	
 	var angle = atan2(new_dir.y, new_dir.x)
 	train_sprite.rotation = angle
@@ -100,7 +100,7 @@ func placing_rail():
 		rail_sprite.modulate = Color(Color.WHITE, 0.0)
 		return
 	
-	rail_sprite.modulate = Color(Color.WHITE, 0.8)
+	rail_sprite.modulate = Color(Color.WHITE, 1.0)
 	
 	var tile_pos = rail_layer.map_to_local(map_pos)
 	var cells = [map_pos]
@@ -114,8 +114,28 @@ func placing_rail():
 
 func placing_station():
 	var map_pos = get_mouse_map_pos()
+	
+	var rail_type = rail_layer.get_rail_type(map_pos)
+	if rail_type != "Straight":
+		station_vert_sprite.modulate = Color(Color.WHITE, 0.0)
+		station_hori_sprite.modulate = Color(Color.WHITE, 0.0)
+		return
+	
+	var is_horizontal = true
+	var directions = rail_layer.get_directions(map_pos)
+	
+	if Vector2i(directions[0]) == Vector2i.LEFT:
+		is_horizontal = true
+		station_hori_sprite.modulate = Color(Color.WHITE, 1.0)
+		station_vert_sprite.modulate = Color(Color.WHITE, 0.0)
+	else:
+		is_horizontal = false
+		station_hori_sprite.modulate = Color(Color.WHITE, 0.0)
+		station_vert_sprite.modulate = Color(Color.WHITE, 1.0)
+	
 	var tile_pos = rail_layer.map_to_local(map_pos)
-	station_sprite.global_position = tile_pos
+	station_hori_sprite.global_position = tile_pos
+	station_vert_sprite.global_position = tile_pos
 
 func get_mouse_map_pos():
 	var mouse_pos = get_global_mouse_position()

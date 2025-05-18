@@ -43,11 +43,18 @@ func start_rail(map_pos):
 	start_pos = points[0]
 	end_pos = points[1]
 	
+	var new_dir
 	previous_dir = current_dir
 	if rail_type != "Curve":
-		current_dir = rail_layer.get_forward_direction(current_map_pos, -current_dir)
+		new_dir = rail_layer.get_forward_direction(current_map_pos, -current_dir)
 	else:
-		current_dir = rail_layer.get_curve_direction(current_map_pos, -current_dir)
+		new_dir = rail_layer.get_curve_direction(current_map_pos, -current_dir)
+	
+	if new_dir == null:
+		destroy()
+		return
+	
+	current_dir = new_dir
 	global_position = start_pos
 
 func start_next_rail():

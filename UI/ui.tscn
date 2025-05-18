@@ -5,7 +5,7 @@
 [ext_resource type="Theme" uid="uid://bpnrvmkgl2ys8" path="res://UI/button_theme.tres" id="2_dajm1"]
 [ext_resource type="Texture2D" uid="uid://bim0gaefuv3hq" path="res://Train/Engine.png" id="3_3sbvi"]
 [ext_resource type="Texture2D" uid="uid://wghc564k1uio" path="res://UI/SingleRail.png" id="3_e6gg6"]
-[ext_resource type="Texture2D" uid="uid://bpmjtga1e01xs" path="res://UI/SingleStation.png" id="4_hat8c"]
+[ext_resource type="Texture2D" uid="uid://bpmjtga1e01xs" path="res://UI/SingleStationVert.png" id="4_hat8c"]
 
 [node name="UI" type="Control"]
 layout_mode = 3

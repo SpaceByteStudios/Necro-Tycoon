@@ -46,6 +46,8 @@ func get_forward_direction(map_pos, back_direction):
 	for dir in directions:
 		if back_direction + Vector2i(dir) == Vector2i.ZERO:
 			return Vector2i(dir)
+	
+	return null
 
 func get_curve_direction(map_pos, back_direction):
 	var directions = get_directions(map_pos)
@@ -53,6 +55,8 @@ func get_curve_direction(map_pos, back_direction):
 	for dir in directions:
 		if back_direction - Vector2i(dir) != Vector2i.ZERO:
 			return Vector2i(dir)
+	
+	return null
 
 func get_directions(map_pos):
 	var tile_data = get_cell_tile_data(map_pos)
