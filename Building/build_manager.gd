@@ -94,8 +94,23 @@ func placing_train():
 
 func placing_rail():
 	var map_pos = get_mouse_map_pos()
+	
+	var building_data = building_layer.get_cell_tile_data(map_pos)
+	if building_data != null:
+		rail_sprite.modulate = Color(Color.WHITE, 0.0)
+		return
+	
+	rail_sprite.modulate = Color(Color.WHITE, 0.8)
+	
 	var tile_pos = rail_layer.map_to_local(map_pos)
+	var cells = [map_pos]
 	rail_sprite.global_position = tile_pos
+	
+	if Input.is_action_pressed('Place'):
+		rail_layer.set_cells_terrain_connect(cells, 0, 0)
+	
+	if Input.is_action_pressed('Remove'):
+		rail_layer.set_cells_terrain_connect(cells, 0, -1)
 
 func placing_station():
 	var map_pos = get_mouse_map_pos()

@@ -40,6 +40,7 @@ func _ready() -> void:
 	
 	engine.rail_layer = rail_layer
 	engine.current_dir = direction
+	engine.destroy_train.connect(_on_destroy_train)
 	engine.setup_wagon(train_id)
 	wagons.push_back(engine)
 	
@@ -60,7 +61,7 @@ func _ready() -> void:
 		wagon.global_position = wagon_global_pos
 		wagon.rail_layer = rail_layer
 		wagon.current_dir = direction
-		wagon.hitbox_entered.connect(_on_hitbox_entered)
+		wagon.destroy_train.connect(_on_destroy_train)
 		
 		wagon.setup_wagon(train_id)
 		wagons.push_back(wagon)
@@ -86,7 +87,7 @@ func _process(delta: float) -> void:
 		if child is TrainWagon:
 			child.set_progress(progress_t)
 
-func _on_hitbox_entered() -> void:
+func _on_destroy_train() -> void:
 	queue_free()
 
 func _on_clickable_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:

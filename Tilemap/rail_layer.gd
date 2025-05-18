@@ -73,7 +73,6 @@ func get_map_pos(global_pos):
 	return map_pos
 
 func check_consecutive_rail(map_pos, forward_dir, length):
-	var rail_map_pos = map_pos
 	var tile_pos = map_to_local(map_pos)
 	
 	for i in length:

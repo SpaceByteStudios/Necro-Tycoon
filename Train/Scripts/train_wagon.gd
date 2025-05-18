@@ -17,7 +17,7 @@ var rail_type : String
 
 var progress_amount : float
 
-signal hitbox_entered
+signal destroy_train
 
 func _process(_delta: float) -> void:
 	move_train()
@@ -30,7 +30,13 @@ func setup_wagon(new_train_id):
 
 func start_rail(map_pos):
 	current_map_pos = map_pos
-	rail_type = rail_layer.get_rail_type(map_pos)
+	var type = rail_layer.get_rail_type(map_pos)
+	
+	if type == null:
+		destroy()
+		return
+	
+	rail_type = type
 	
 	var points = rail_layer.get_start_end_point(map_pos, current_dir)
 	
@@ -55,6 +61,8 @@ func move_train():
 		"Crossing":
 			linear_movement()
 		"Station":
+			linear_movement()
+		"End":
 			linear_movement()
 		"Curve":
 			circular_movement()
@@ -111,4 +119,7 @@ func enable_train_collision():
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area is TrainHitbox:
 		if area.train_id != train_id:
-			hitbox_entered.emit()
+			destroy()
+
+func destroy():
+	destroy_train.emit()

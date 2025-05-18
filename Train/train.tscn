@@ -76,6 +76,5 @@ texture = ExtResource("4_ye6r3")
 lifetime = 0.7
 process_material = SubResource("ParticleProcessMaterial_ye6r3")
 
-[connection signal="hitbox_entered" from="Engine" to="." method="_on_hitbox_entered"]
 [connection signal="input_event" from="Engine/Clickable" to="." method="_on_clickable_input_event"]
 [connection signal="area_entered" from="Engine/Hitbox" to="Engine" method="_on_hitbox_area_entered"]
