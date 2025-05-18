@@ -74,3 +74,13 @@ func get_map_pos(global_pos):
 
 func check_consecutive_rail(map_pos, forward_dir, length):
 	var rail_map_pos = map_pos
+	var tile_pos = map_to_local(map_pos)
+	
+	for i in length:
+		tile_pos -= forward_dir * 15.99
+		var tile_map_pos = local_to_map(tile_pos)
+		var tile_type = get_rail_type(tile_map_pos)
+		if tile_type == "Curve" || tile_type == null:
+			return false
+	
+	return true

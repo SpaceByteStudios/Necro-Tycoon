@@ -73,6 +73,8 @@ func placing_train():
 	wagons_sprite.rotation = angle
 	
 	var is_cosnsecutive = rail_layer.check_consecutive_rail(map_pos, new_dir, 4)
+	if !is_cosnsecutive:
+		return
 	
 	if Input.is_action_just_pressed('Place'):
 		var train : Train = train_scene.instantiate()
