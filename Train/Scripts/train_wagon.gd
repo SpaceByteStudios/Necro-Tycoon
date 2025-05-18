@@ -4,7 +4,7 @@ class_name TrainWagon
 @onready var hitbox = $Hitbox
 
 var train_id : int = 0
-var rail_layer : RailManager
+var rail_layer : RailLayer
 
 var previous_dir : Vector2i
 var current_dir : Vector2i = Vector2i.LEFT
@@ -29,6 +29,7 @@ func setup_wagon(new_train_id):
 	start_rail(current_map_pos)
 
 func start_rail(map_pos):
+	current_map_pos = map_pos
 	rail_type = rail_layer.get_rail_type(map_pos)
 	
 	var points = rail_layer.get_start_end_point(map_pos, current_dir)
@@ -40,7 +41,7 @@ func start_rail(map_pos):
 	if rail_type != "Curve":
 		current_dir = rail_layer.get_forward_direction(current_map_pos, -current_dir)
 	else:
-		current_dir = rail_layer.get_curve_direction(current_map_pos, current_dir)
+		current_dir = rail_layer.get_curve_direction(current_map_pos, -current_dir)
 	global_position = start_pos
 
 func start_next_rail():

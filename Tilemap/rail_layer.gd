@@ -1,5 +1,5 @@
 extends TileMapLayer
-class_name RailManager
+class_name RailLayer
 
 func print_tile_info(map_pos):
 	var tile_pos = map_to_local(map_pos)
@@ -51,7 +51,7 @@ func get_curve_direction(map_pos, back_direction):
 	var directions = get_directions(map_pos)
 	
 	for dir in directions:
-		if back_direction + Vector2i(dir) != Vector2i.ZERO:
+		if back_direction - Vector2i(dir) != Vector2i.ZERO:
 			return Vector2i(dir)
 
 func get_directions(map_pos):
@@ -61,10 +61,16 @@ func get_directions(map_pos):
 
 func get_rail_type(map_pos):
 	var tile_data = get_cell_tile_data(map_pos)
-	var type = tile_data.get_custom_data("Type")
-	return type
+	if tile_data != null:
+		var type = tile_data.get_custom_data("Type")
+		return type
+	else:
+		return null
 
 func get_map_pos(global_pos):
 	var local_rail = to_local(global_pos)
 	var map_pos = local_to_map(local_rail)
 	return map_pos
+
+func check_consecutive_rail(map_pos, forward_dir, length):
+	var rail_map_pos = map_pos

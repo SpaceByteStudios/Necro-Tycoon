@@ -7,7 +7,7 @@ class_name Train
 
 @export var train_id : int
 
-@export var rail_layer : RailManager
+@export var rail_layer : RailLayer
 @export var wagon_amount : int
 @export var train_speed = 16.0
 @export var acceleration = 10.0
@@ -15,7 +15,7 @@ class_name Train
 @export_enum("Left", "Right", "Up", "Down")
 var start_dir : String
 
-var direction : Vector2i
+var direction : Vector2i = Vector2i.ZERO
 var current_speed : float
 
 var progress_t : float
@@ -27,15 +27,16 @@ var wagons : Array[TrainWagon]
 func _ready() -> void:
 	particles.emitting = true
 	
-	match start_dir:
-		"Left":
-			direction = Vector2i.LEFT
-		"Right":
-			direction = Vector2i.RIGHT
-		"Up":
-			direction = Vector2i.UP
-		"Down":
-			direction = Vector2i.DOWN
+	if direction == Vector2i.ZERO:
+		match start_dir:
+			"Left":
+				direction = Vector2i.LEFT
+			"Right":
+				direction = Vector2i.RIGHT
+			"Up":
+				direction = Vector2i.UP
+			"Down":
+				direction = Vector2i.DOWN
 	
 	engine.rail_layer = rail_layer
 	engine.current_dir = direction
@@ -51,7 +52,7 @@ func _ready() -> void:
 		var wagon_map_pos = rail_layer.get_map_pos(wagon_global_pos)
 		
 		var rail_type = rail_layer.get_rail_type(wagon_map_pos)
-		if rail_type == "Curve":
+		if rail_type == "Curve" || rail_type == null:
 			break
 		
 		add_child(wagon)
@@ -87,3 +88,30 @@ func _process(delta: float) -> void:
 
 func _on_hitbox_entered() -> void:
 	queue_free()
+
+func _on_clickable_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		flip_train()
+
+func flip_train():
+	current_speed = 0.0
+	
+	var cached_progress = wagons[0].progress_amount
+	var cached_data = []
+	
+	for wagon in wagons:
+		cached_data.append({
+			"map_pos" : wagon.current_map_pos,
+			"current_dir" : wagon.current_dir
+		})
+	
+	for i in wagons.size():
+		var j = wagons.size() - i - 1
+		var wagon = wagons[i]
+		var data = cached_data[j]
+		
+		wagon.current_map_pos = data["map_pos"]
+		wagon.current_dir = -data["current_dir"]
+		
+		wagon.start_rail(wagon.current_map_pos)
+		wagon.set_progress(cached_progress)

@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bh46v6mstoux5"]
+
+[ext_resource type="Script" uid="uid://du1dep5qxc8tj" path="res://Building/build_manager.gd" id="1_liqai"]
+[ext_resource type="Texture2D" uid="uid://bim0gaefuv3hq" path="res://Train/Engine.png" id="2_e2ksb"]
+[ext_resource type="Texture2D" uid="uid://wghc564k1uio" path="res://UI/SingleRail.png" id="2_xhdj8"]
+[ext_resource type="Texture2D" uid="uid://bpmjtga1e01xs" path="res://UI/SingleStation.png" id="3_6gu8p"]
+[ext_resource type="Texture2D" uid="uid://2wwl6c7gw6bi" path="res://Train/Wagon.png" id="3_dfeae"]
+
+[node name="BuildManager" type="Node2D"]
+script = ExtResource("1_liqai")
+
+[node name="Train" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+
+[node name="TrainSprite" type="Sprite2D" parent="Train"]
+texture = ExtResource("2_e2ksb")
+
+[node name="Wagons" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+
+[node name="WagonSprite" type="Sprite2D" parent="Wagons"]
+position = Vector2(-16, 0)
+texture = ExtResource("3_dfeae")
+
+[node name="WagonSprite2" type="Sprite2D" parent="Wagons"]
+position = Vector2(-32, 0)
+texture = ExtResource("3_dfeae")
+
+[node name="WagonSprite3" type="Sprite2D" parent="Wagons"]
+position = Vector2(-48, 0)
+texture = ExtResource("3_dfeae")
+
+[node name="WagonSprite4" type="Sprite2D" parent="Wagons"]
+position = Vector2(-64, 0)
+texture = ExtResource("3_dfeae")
+
+[node name="RailSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("2_xhdj8")
+
+[node name="StationSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("3_6gu8p")
