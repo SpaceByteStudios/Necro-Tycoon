@@ -45,7 +45,7 @@ func start_rail(map_pos):
 	
 	var new_dir
 	previous_dir = current_dir
-	if rail_type != "Curve":
+	if rail_type != "Curve" && rail_type != "Junction":
 		new_dir = rail_layer.get_forward_direction(current_map_pos, -current_dir)
 	else:
 		new_dir = rail_layer.get_curve_direction(current_map_pos, -current_dir)
@@ -73,6 +73,8 @@ func move_train():
 			linear_movement()
 		"Curve":
 			circular_movement()
+		"Junction":
+			junction_movement()
 
 func set_progress(progress):
 	progress_amount = progress
@@ -93,6 +95,15 @@ func circular_movement():
 	var motion = target_position - global_position
 	global_position += motion
 	look_at(global_position + motion)	
+
+func junction_movement():
+	var move_vector = (start_pos - end_pos).normalized()
+	if move_vector == Vector2.RIGHT || move_vector == Vector2.LEFT:
+		linear_movement()
+	elif move_vector == Vector2.UP || move_vector == Vector2.DOWN:
+		linear_movement()
+	else:
+		circular_movement()
 
 func is_turn_clockwise(from_dir: Vector2, to_dir: Vector2) -> bool:
 	var cross = from_dir.x * to_dir.y - from_dir.y * to_dir.x

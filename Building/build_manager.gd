@@ -83,6 +83,7 @@ func placing_train():
 		train.rail_layer = rail_layer
 		train.direction = new_dir
 		train.current_speed = 0.0
+		train.wagon_amount = 4
 		
 		get_tree().root.add_child(train)
 		
@@ -116,7 +117,7 @@ func placing_station():
 	var map_pos = get_mouse_map_pos()
 	
 	var rail_type = rail_layer.get_rail_type(map_pos)
-	if rail_type != "Straight":
+	if rail_type != "Straight" && rail_type != "Station":
 		station_vert_sprite.modulate = Color(Color.WHITE, 0.0)
 		station_hori_sprite.modulate = Color(Color.WHITE, 0.0)
 		return
@@ -136,6 +137,18 @@ func placing_station():
 	var tile_pos = rail_layer.map_to_local(map_pos)
 	station_hori_sprite.global_position = tile_pos
 	station_vert_sprite.global_position = tile_pos
+	
+	if Input.is_action_pressed('Place'):
+		if is_horizontal:
+			rail_layer.set_cell(map_pos, 0, Vector2i(0, 2))
+		else:
+			rail_layer.set_cell(map_pos, 0, Vector2i(1, 2))
+	
+	if Input.is_action_pressed('Remove'):
+		if is_horizontal:
+			rail_layer.set_cell(map_pos, 0, Vector2i(0, 0))
+		else:
+			rail_layer.set_cell(map_pos, 0, Vector2i(0, 1))
 
 func get_mouse_map_pos():
 	var mouse_pos = get_global_mouse_position()

@@ -33,7 +33,7 @@ func get_start_end_point(map_pos, direction):
 		elif rail_type != "Crossing":
 			end_points.append(Vector2(dir_pos))
 		elif direction - Vector2i(dir) == Vector2i.ZERO:
-				end_points.append(Vector2(dir_pos))
+			end_points.append(Vector2(dir_pos))
 	
 	points.append(start_point)
 	points.append_array(end_points)
