@@ -95,16 +95,19 @@ func _on_clickable_input_event(_viewport: Node, event: InputEvent, _shape_idx: i
 		flip_train()
 
 func flip_train():
-	current_speed = 0.0
-	
 	var cached_progress = wagons[0].progress_amount
 	var cached_data = []
 	
 	for wagon in wagons:
+		if wagon.rail_type == "Junction":
+			return
+		
 		cached_data.append({
 			"map_pos" : wagon.current_map_pos,
 			"current_dir" : wagon.current_dir
 		})
+	
+	current_speed = 0.0
 	
 	for i in wagons.size():
 		var j = wagons.size() - i - 1

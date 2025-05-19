@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://37pib8qb4y8e"]
+[gd_scene load_steps=10 format=4 uid="uid://37pib8qb4y8e"]
 
 [ext_resource type="PackedScene" uid="uid://bh46v6mstoux5" path="res://Building/build_manager.tscn" id="1_oat8o"]
 [ext_resource type="TileSet" uid="uid://myg3ljvpc1hb" path="res://Tilemap/MapTileset.tres" id="1_onf2v"]
@@ -7,6 +7,8 @@
 [ext_resource type="TileSet" uid="uid://c3twyvv1rmlq7" path="res://Tilemap/BuildingTileset.tres" id="4_wo00q"]
 [ext_resource type="PackedScene" uid="uid://mbg7pvu7rx1n" path="res://UI/ui.tscn" id="6_5b1ro"]
 [ext_resource type="Script" uid="uid://48liv2y7u3ei" path="res://Tilemap/building_layer.gd" id="6_oat8o"]
+[ext_resource type="Script" uid="uid://bbyhh16fhbr4d" path="res://Building/station_manager.gd" id="7_kd12v"]
+[ext_resource type="Texture2D" uid="uid://bgq0to4a4vpe7" path="res://UI/StationMarker.png" id="8_oat8o"]
 
 [node name="GameScene" type="Node2D"]
 
@@ -28,6 +30,13 @@ script = ExtResource("6_oat8o")
 [node name="BuildManager" parent="." node_paths=PackedStringArray("rail_layer", "building_layer") instance=ExtResource("1_oat8o")]
 rail_layer = NodePath("../Map/RailLayer")
 building_layer = NodePath("../Map/BuildingLayer")
+
+[node name="StationManager" type="Node2D" parent="."]
+script = ExtResource("7_kd12v")
+
+[node name="StationMarker" type="Sprite2D" parent="StationManager"]
+position = Vector2(232, 216)
+texture = ExtResource("8_oat8o")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
