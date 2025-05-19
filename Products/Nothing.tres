@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ProductType" load_steps=2 format=3 uid="uid://dwuffq76lhdr5"]
+
+[ext_resource type="Script" uid="uid://djt3f2oxburea" path="res://Products/ProductType.gd" id="1_m7bk2"]
+
+[resource]
+script = ExtResource("1_m7bk2")
+name = "Nothing"
+product_color = Color(1, 1, 1, 1)
+metadata/_custom_type_script = "uid://djt3f2oxburea"
