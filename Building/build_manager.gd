@@ -138,7 +138,9 @@ func placing_station():
 	station_hori_sprite.global_position = tile_pos
 	station_vert_sprite.global_position = tile_pos
 	
-	if Input.is_action_pressed('Place'):
+	var has_building = building_layer.has_building_neighbors(map_pos)
+	
+	if Input.is_action_pressed('Place') && has_building:
 		if is_horizontal:
 			rail_layer.set_cell(map_pos, 0, Vector2i(0, 2))
 		else:
