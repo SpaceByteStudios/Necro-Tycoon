@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt5uyv0x16wwx"]
+
+[ext_resource type="Script" uid="uid://bc03usmchwe6r" path="res://Building/station_marker.gd" id="1_6u3ll"]
+[ext_resource type="Texture2D" uid="uid://bgq0to4a4vpe7" path="res://UI/StationMarker.png" id="1_n77ld"]
+
+[node name="StationMarker" type="Node2D"]
+script = ExtResource("1_6u3ll")
+
+[node name="MarkerSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_n77ld")
