@@ -74,4 +74,6 @@ custom_data_layer_1/name = "Production"
 custom_data_layer_1/type = 4
 custom_data_layer_2/name = "Accepts"
 custom_data_layer_2/type = 4
+custom_data_layer_3/name = "MarkerID"
+custom_data_layer_3/type = 2
 sources/0 = SubResource("TileSetAtlasSource_ecvex")

@@ -43,7 +43,7 @@ func get_building_neighbor(map_pos):
 			
 			if tile_data == null:
 				continue
-		
+			
 			var is_building = tile_data.get_custom_data("IsBuilding")
 			if is_building:
 				return cell
@@ -99,6 +99,22 @@ func get_building_accepts(map_pos):
 			return product_array[5]
 		"Weapon":
 			return product_array[6]
+
+func set_building_id(map_pos, id):
+	var tile_data = get_cell_tile_data(map_pos)
+	
+	if tile_data == null:
+		return
+	
+	tile_data.set_custom_data("MarkerID", id)
+
+func get_building_id(map_pos):
+	var tile_data = get_cell_tile_data(map_pos)
+	
+	if tile_data == null:
+		return
+	
+	return tile_data.get_custom_data("MarkerID")
 
 func get_map_pos(global_pos):
 	var local_rail = to_local(global_pos)

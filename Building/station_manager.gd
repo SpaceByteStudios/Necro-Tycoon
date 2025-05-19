@@ -15,23 +15,25 @@ enum Mode{
 }
 
 var mode = Mode.NONE
-var building_cells : Array[Vector2i]
+var markers_array : Array[StationMarker]
 
 func _ready() -> void:
 	markers.visible = false
 	signs.visible = false
 	
-	building_cells = building_layer.get_building_cells()
+	var building_cells = building_layer.get_building_cells()
 	
-	for cell in building_cells:
-		var pos = building_layer.map_to_local(cell)
+	for i in building_cells.size():
+		var pos = building_layer.map_to_local(building_cells[i])
 		pos.y -= 16
 		
 		var marker : StationMarker = marker_scene.instantiate()
 		marker.global_position = pos
-		marker.production = building_layer.get_building_production(cell)
-		marker.accepts = building_layer.get_building_accepts(cell)
+		building_layer.set_building_id(building_cells[i], i)
+		marker.production = building_layer.get_building_production(building_cells[i])
+		marker.accepts = building_layer.get_building_accepts(building_cells[i])
 		markers.add_child(marker)
+		markers_array.append(marker)
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed('Switch Mode'):
@@ -52,3 +54,8 @@ func _process(delta: float) -> void:
 func get_cell_pos(pos):
 	var map_pos = building_layer.local_to_map(pos)
 	return map_pos
+
+func get_station_marker(map_pos):
+	var building_cell = building_layer.get_building_neighbor(map_pos)
+	var marker_id = building_layer.get_building_id(building_cell)
+	return markers_array[marker_id]
