@@ -29,11 +29,11 @@ theme_override_constants/separation = 0
 [node name="Filler" type="Control" parent="VBox"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 10.0
+size_flags_stretch_ratio = 20.0
 mouse_filter = 2
 
 [node name="HBox" type="HBoxContainer" parent="VBox"]
-custom_minimum_size = Vector2(0, 64)
+custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
@@ -41,6 +41,7 @@ theme_override_constants/separation = 0
 [node name="Filler" type="Control" parent="VBox/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
 mouse_filter = 2
 
 [node name="Container" type="Control" parent="VBox/HBox"]
@@ -49,7 +50,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.7
 
 [node name="Background" type="NinePatchRect" parent="VBox/HBox/Container"]
-custom_minimum_size = Vector2(168, 64)
+custom_minimum_size = Vector2(120, 32)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -86,7 +87,7 @@ size_flags_stretch_ratio = 2.0
 theme_override_constants/separation = 4
 
 [node name="TrainButton" type="Button" parent="VBox/HBox/Container/Margin/Buttons"]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -97,7 +98,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="RailButton" type="Button" parent="VBox/HBox/Container/Margin/Buttons"]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -108,7 +109,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="StationButton" type="Button" parent="VBox/HBox/Container/Margin/Buttons"]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -121,6 +122,7 @@ expand_icon = true
 [node name="Filler2" type="Control" parent="VBox/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
 mouse_filter = 2
 
 [node name="Filler2" type="Control" parent="VBox"]
@@ -130,7 +132,7 @@ mouse_filter = 2
 
 [connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/TrainButton" to="." method="_on_train_button_toggled"]
 [connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/TrainButton" to="." method="_on_button_toggled"]
-[connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/RailButton" to="." method="_on_rail_button_toggled"]
 [connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/RailButton" to="." method="_on_button_toggled"]
+[connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/RailButton" to="." method="_on_rail_button_toggled"]
 [connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/StationButton" to="." method="_on_station_button_toggled"]
 [connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/StationButton" to="." method="_on_button_toggled"]

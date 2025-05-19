@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bgq0to4a4vpe7" path="res://UI/StationMarker.png" id="1_n77ld"]
 
 [node name="StationMarker" type="Node2D"]
+z_index = 10
 script = ExtResource("1_6u3ll")
 
 [node name="MarkerSprite" type="Sprite2D" parent="."]

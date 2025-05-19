@@ -1,4 +1,5 @@
 extends Node2D
+class_name StationManager
 
 @onready var marker_scene = preload('res://Building/station_marker.tscn')
 
@@ -16,3 +17,7 @@ func _ready() -> void:
 		var marker : Node2D = marker_scene.instantiate()
 		marker.global_position = pos
 		add_child(marker)
+
+func get_cell_pos(pos):
+	var map_pos = building_layer.local_to_map(pos)
+	return map_pos

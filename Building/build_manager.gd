@@ -10,6 +10,7 @@ extends Node2D
 
 @export var rail_layer : RailLayer
 @export var building_layer : BuildingLayer
+@export var station_manager : StationManager
 
 enum BuildState{
 	NONE,
@@ -84,6 +85,7 @@ func placing_train():
 		train.direction = new_dir
 		train.current_speed = 0.0
 		train.wagon_amount = 4
+		train.station_manager = station_manager
 		
 		get_tree().root.add_child(train)
 		

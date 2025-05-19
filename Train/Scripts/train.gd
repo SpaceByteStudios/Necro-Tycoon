@@ -24,6 +24,8 @@ var rail_length : float = 16.0
 
 var wagons : Array[TrainWagon]
 
+var station_manager : StationManager
+
 func _ready() -> void:
 	particles.emitting = true
 	
@@ -47,7 +49,7 @@ func _ready() -> void:
 	var wagon_dir = engine.current_dir
 	var wagon_global_pos = engine.global_position
 	for i in wagon_amount:
-		var wagon : TrainWagon = wagon_scene.instantiate()
+		var wagon : CarrierWagon = wagon_scene.instantiate()
 		
 		wagon_global_pos -= wagon_dir * 15.99
 		var wagon_map_pos = rail_layer.get_map_pos(wagon_global_pos)
@@ -62,6 +64,7 @@ func _ready() -> void:
 		wagon.rail_layer = rail_layer
 		wagon.current_dir = direction
 		wagon.destroy_train.connect(_on_destroy_train)
+		wagon.station_manager = station_manager
 		
 		wagon.setup_wagon(train_id)
 		wagons.push_back(wagon)
