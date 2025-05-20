@@ -6,4 +6,4 @@ The theme was *From the dead*. So I made a **Tycoon Game** where you have to bui
 Play the game here:
 https://space-byte.itch.io/necro-tycoon
 
-Use the code in whatever way you want
+Use the code in whatever way you want :)!
