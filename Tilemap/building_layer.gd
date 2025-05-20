@@ -71,7 +71,7 @@ func get_building_production(map_pos):
 			return product_array[4]
 		"Iron":
 			return product_array[5]
-		"Weapons":
+		"Weapon":
 			return product_array[6]
 		"Money":
 			return product_array[7]

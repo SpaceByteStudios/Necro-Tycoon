@@ -33,6 +33,7 @@ theme_override_constants/separation = 0
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="MoneyLabel" type="Label" parent="VBox/MoneyControl"]
 custom_minimum_size = Vector2(96, 32)
@@ -41,7 +42,7 @@ offset_right = 100.0
 offset_bottom = 40.0
 theme_override_fonts/font = ExtResource("2_cbfhl")
 theme_override_font_sizes/font_size = 16
-text = "100"
+text = "0"
 horizontal_alignment = 2
 vertical_alignment = 1
 text_overrun_behavior = 1
@@ -161,7 +162,7 @@ mouse_filter = 2
 
 [connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/TrainButton" to="." method="_on_train_button_toggled"]
 [connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/TrainButton" to="." method="_on_button_toggled"]
-[connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/RailButton" to="." method="_on_button_toggled"]
 [connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/RailButton" to="." method="_on_rail_button_toggled"]
-[connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/StationButton" to="." method="_on_button_toggled"]
+[connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/RailButton" to="." method="_on_button_toggled"]
 [connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/StationButton" to="." method="_on_station_button_toggled"]
+[connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/StationButton" to="." method="_on_button_toggled"]

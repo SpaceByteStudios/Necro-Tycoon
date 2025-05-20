@@ -16,6 +16,10 @@ var accept_amount : int = 0
 
 var progress = 0.0
 
+signal get_transport_money()
+signal get_house_money()
+signal get_barrack_money()
+
 func _ready() -> void:
 	production_icon.texture = production.product_icon
 	show_products_amount()
@@ -40,6 +44,7 @@ func get_accept(product : Product):
 	
 	if accept_amount < accepts.max_amount:
 		accept_amount += 1
+		get_transport_money.emit()
 		return true
 	
 	return false
@@ -53,6 +58,12 @@ func give_product() -> Product:
 	return null
 
 func produce_product():
+	if accepts.name == "Carrot" && production.name == "Money":
+		get_house_money.emit()
+	
+	if accepts.name == "Weapon" && production.name == "Money":
+		get_barrack_money.emit()
+	
 	accept_amount -= 1
 	products_amount += 1
 	show_products_amount()

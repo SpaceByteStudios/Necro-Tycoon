@@ -6,6 +6,10 @@ extends Node2D
 @onready var station_vert_sprite = $StationVertSprite
 @onready var station_hori_sprite = $StationHoriSprite
 
+@onready var rail_place_audio = $RailPlace
+@onready var rail_break_audio = $RailBreak
+@onready var bridge_audio = $BridgePlace
+
 @onready var train_scene = preload('res://Train/train.tscn')
 
 @export var ground_layer : GroundLayer
@@ -131,16 +135,21 @@ func placing_rail():
 		if !enough_money:
 			return
 		
+		rail_place_audio.play()
+		
 		money_manager.pay_money(rail_cost)
 		rail_layer.set_cells_terrain_connect(cells, 0, 0)
 	
 	if Input.is_action_pressed('Remove'):
+		var cell = rail_layer.get_cell_source_id(cells[0])
 		var is_bridge = rail_layer.is_a_bridge(cells[0])
 		
-		if is_bridge == null:
+		if is_bridge == null || cell == -1:
 			return
 		
 		if !is_bridge:
+			rail_break_audio.play()
+			money_manager.get_money(rail_cost)
 			rail_layer.set_cells_terrain_connect(cells, 0, -1)
 
 func placing_station():
@@ -191,6 +200,7 @@ func _on_buy_bridge_button(button : Control):
 	
 	if enough_money:
 		money_manager.pay_money(button.cost_amount)
+		bridge_audio.play()
 		var map_pos = button.map_pos
 		rail_layer.build_bridge(map_pos)
 		button.queue_free()

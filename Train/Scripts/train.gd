@@ -3,6 +3,10 @@ class_name Train
 
 @onready var engine = $Engine
 @onready var particles = $Engine/SmokeParticles
+
+@onready var whistle = $TrainWhistle
+@onready var explosion = $TrainExplosion
+
 @onready var wagon_scene = preload('res://Train/wagon.tscn')
 
 @export var train_id : int
@@ -28,6 +32,7 @@ var station_manager : StationManager
 
 func _ready() -> void:
 	particles.emitting = true
+	whistle.play()
 	
 	if direction == Vector2i.ZERO:
 		match start_dir:
@@ -91,6 +96,15 @@ func _process(delta: float) -> void:
 			child.set_progress(progress_t)
 
 func _on_destroy_train() -> void:
+	current_speed = 0.0
+	
+	engine.visible = false
+	for wagon in wagons:
+		wagon.visible = false
+	
+	explosion.play()
+	
+	await explosion.finished
 	queue_free()
 
 func _on_clickable_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:

@@ -7,6 +7,11 @@ class_name StationManager
 @onready var markers = $Markers
 
 @export var building_layer : BuildingLayer
+@export var money_manager : MoneyManager
+
+@export var transport_money_amount : int = 0
+@export var house_money_amount : int = 0
+@export var barrack_money_amount : int = 0
 
 enum Mode{
 	NONE,
@@ -35,6 +40,11 @@ func _ready() -> void:
 		markers_dict.set(building_cells[i], i)
 		marker.production = building_layer.get_building_production(building_cells[i])
 		marker.accepts = building_layer.get_building_accepts(building_cells[i])
+		
+		marker.get_transport_money.connect(get_transport_money)
+		marker.get_house_money.connect(get_house_money)
+		marker.get_barrack_money.connect(get_barrack_money)
+		
 		markers.add_child(marker)
 		markers_array.push_back(marker)
 
@@ -62,3 +72,12 @@ func get_station_marker(map_pos):
 	var building_cell = building_layer.get_building_neighbor(map_pos)
 	var marker_id = markers_dict.get(building_cell)
 	return markers_array[marker_id]
+
+func get_transport_money():
+	money_manager.get_money(transport_money_amount)
+
+func get_house_money():
+	money_manager.get_money(house_money_amount)
+
+func get_barrack_money():
+	money_manager.get_money(barrack_money_amount)

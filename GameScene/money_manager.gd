@@ -1,9 +1,9 @@
 extends Node2D
 class_name MoneyManager
 
-@export var start_money = 50
+@export var start_money : int = 50
 
-var money_amount = 0
+var money_amount : int = 0
 
 signal update_ui(money)
 

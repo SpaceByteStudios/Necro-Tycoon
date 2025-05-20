@@ -236,6 +236,12 @@ texture = ExtResource("1_0a4wb")
 0:4/0 = 0
 0:4/0/custom_data_0 = true
 0:4/0/custom_data_1 = true
+5:4/0 = 0
+4:4/0 = 0
+4:4/0/custom_data_0 = true
+1:4/0 = 0
+1:4/0/custom_data_0 = true
+1:4/0/custom_data_1 = true
 
 [resource]
 terrain_set_0/mode = 0
