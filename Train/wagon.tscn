@@ -1,17 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://bf87p8y3hrk3r"]
+[gd_scene load_steps=10 format=3 uid="uid://bf87p8y3hrk3r"]
 
 [ext_resource type="Script" uid="uid://bcdvstnknk60f" path="res://Train/Scripts/carrier_wagon.gd" id="1_yn8si"]
+[ext_resource type="Resource" uid="uid://dwuffq76lhdr5" path="res://Products/Resources/Nothing.tres" id="2_5x22e"]
 [ext_resource type="Script" uid="uid://b3hvylr72p31i" path="res://Train/Scripts/train_hitbox.gd" id="2_515tp"]
 [ext_resource type="Texture2D" uid="uid://2wwl6c7gw6bi" path="res://Train/Wagon.png" id="2_yn8si"]
+[ext_resource type="Shader" uid="uid://c56h3pbks1ben" path="res://Train/wagon.gdshader" id="4_5x22e"]
+[ext_resource type="Texture2D" uid="uid://bo0pkc6spx6s6" path="res://Train/WagonMask.png" id="5_my4ts"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yn8si"]
 size = Vector2(16, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ynty"]
-size = Vector2(8, 8)
+size = Vector2(4, 4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_my4ts"]
+resource_local_to_scene = true
+shader = ExtResource("4_5x22e")
+shader_parameter/mask_texture = ExtResource("5_my4ts")
+shader_parameter/cargo_color = Color(0.545098, 0.607843, 0.705882, 1)
 
 [node name="Wagon" type="Node2D"]
 script = ExtResource("1_yn8si")
+start_cargo = ExtResource("2_5x22e")
+empty_cargo = ExtResource("2_5x22e")
 
 [node name="Hitbox" type="Area2D" parent="."]
 monitoring = false
@@ -21,9 +32,6 @@ script = ExtResource("2_515tp")
 [node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_yn8si")
 
-[node name="WagonSprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_yn8si")
-
 [node name="StationArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
@@ -31,6 +39,10 @@ collision_mask = 2
 [node name="HitboxShape" type="CollisionShape2D" parent="StationArea"]
 shape = SubResource("RectangleShape2D_6ynty")
 debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="WagonSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_my4ts")
+texture = ExtResource("2_yn8si")
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="StationArea" to="." method="_on_station_area_body_entered"]

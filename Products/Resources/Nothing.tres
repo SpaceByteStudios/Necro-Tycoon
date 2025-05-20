@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Product" load_steps=2 format=3 uid="uid://dwuffq76lhdr5"]
+
+[ext_resource type="Script" uid="uid://djt3f2oxburea" path="res://Products/Product.gd" id="1_m7bk2"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_m7bk2")
+name = "Nothing"
+always_produce = false
+production_speed = 0.2
+product_color = Color(0.545098, 0.607843, 0.705882, 1)
+max_amount = 16
+metadata/_custom_type_script = "uid://djt3f2oxburea"

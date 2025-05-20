@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Product" load_steps=3 format=3 uid="uid://7cl2l2fvxvw8"]
+
+[ext_resource type="Texture2D" uid="uid://dg6fb2dwt6etc" path="res://Products/Textures/Bonemeal.png" id="1_6r2qr"]
+[ext_resource type="Script" uid="uid://djt3f2oxburea" path="res://Products/Product.gd" id="1_e1g12"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_e1g12")
+name = "Bonemeal"
+product_icon = ExtResource("1_6r2qr")
+always_produce = false
+production_speed = 0.1
+product_color = Color(1, 1, 1, 1)
+max_amount = 16
+metadata/_custom_type_script = "uid://djt3f2oxburea"

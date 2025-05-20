@@ -1,6 +1,10 @@
 extends TileMapLayer
 class_name RailLayer
 
+var bridge_tiles : Array[Vector2i]
+
+@export var ground_layer : GroundLayer
+
 func print_tile_info(map_pos):
 	var tile_pos = map_to_local(map_pos)
 	var tile_data = get_cell_tile_data(map_pos)
@@ -87,3 +91,46 @@ func check_consecutive_rail(map_pos, forward_dir, length):
 			return false
 	
 	return true
+
+func build_bridge(map_pos):
+	var is_river = ground_layer.is_cell_river(map_pos)
+	
+	if is_river:
+		var is_wasteland = ground_layer.is_cell_wasteland(map_pos)
+		var is_horizontal = ground_layer.is_cell_horizontal(map_pos)
+		if is_wasteland:
+			if is_horizontal:
+				set_cell(map_pos, 0, Vector2i(2, 5))
+			else:
+				set_cell(map_pos, 0, Vector2i(3, 5))
+		else:
+			if is_horizontal:
+				set_cell(map_pos, 0, Vector2i(0, 5))
+			else:
+				set_cell(map_pos, 0, Vector2i(1, 5))
+		
+		finalize_bridge(map_pos, is_horizontal)
+
+func finalize_bridge(map_pos, is_horizontal):
+	var vector1 : Vector2i
+	var vector2 : Vector2i
+	var atlas_coord : Vector2i
+	
+	if is_horizontal:
+		vector1 = Vector2i.UP
+		vector2 = Vector2i.DOWN
+		atlas_coord = Vector2i(0, 1)
+	else:
+		vector1 = Vector2i.LEFT
+		vector2 = Vector2i.RIGHT
+		atlas_coord = Vector2i(0, 0)
+	
+	set_cell(map_pos + vector1, 0, atlas_coord)
+	set_cell(map_pos + vector2, 0, atlas_coord)
+	
+	bridge_tiles.append(map_pos)
+	bridge_tiles.append(map_pos + vector1)
+	bridge_tiles.append(map_pos + vector2)
+
+func is_a_bridge(map_pos):
+	return bridge_tiles.has(map_pos)

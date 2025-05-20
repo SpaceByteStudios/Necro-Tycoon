@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://mbg7pvu7rx1n"]
+[gd_scene load_steps=9 format=3 uid="uid://mbg7pvu7rx1n"]
 
 [ext_resource type="Texture2D" uid="uid://kcohi58plb8j" path="res://UI/BackgroundUI.png" id="1_2fwl4"]
 [ext_resource type="Script" uid="uid://c74sdycslyyuk" path="res://UI/ui.gd" id="1_nm1m0"]
+[ext_resource type="Texture2D" uid="uid://bjpta4cdwh1n4" path="res://Products/Textures/Money.png" id="2_c7tqi"]
+[ext_resource type="FontFile" uid="uid://dyvu7ridfyt4k" path="res://Fonts/AcPlus_IBM_BIOS.ttf" id="2_cbfhl"]
 [ext_resource type="Theme" uid="uid://bpnrvmkgl2ys8" path="res://UI/button_theme.tres" id="2_dajm1"]
 [ext_resource type="Texture2D" uid="uid://bim0gaefuv3hq" path="res://Train/Engine.png" id="3_3sbvi"]
 [ext_resource type="Texture2D" uid="uid://wghc564k1uio" path="res://UI/SingleRail.png" id="3_e6gg6"]
@@ -24,7 +26,33 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
+
+[node name="MoneyControl" type="Control" parent="VBox"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MoneyLabel" type="Label" parent="VBox/MoneyControl"]
+custom_minimum_size = Vector2(96, 32)
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("2_cbfhl")
+theme_override_font_sizes/font_size = 16
+text = "100"
+horizontal_alignment = 2
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="MoneyIcon" type="TextureRect" parent="VBox/MoneyControl"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 3.0
+offset_right = 128.0
+offset_bottom = 35.0
+texture = ExtResource("2_c7tqi")
 
 [node name="Filler" type="Control" parent="VBox"]
 layout_mode = 2
@@ -36,12 +64,13 @@ mouse_filter = 2
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="Filler" type="Control" parent="VBox/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
+size_flags_stretch_ratio = 1.5
 mouse_filter = 2
 
 [node name="Container" type="Control" parent="VBox/HBox"]
@@ -122,7 +151,7 @@ expand_icon = true
 [node name="Filler2" type="Control" parent="VBox/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
+size_flags_stretch_ratio = 1.5
 mouse_filter = 2
 
 [node name="Filler2" type="Control" parent="VBox"]
@@ -134,5 +163,5 @@ mouse_filter = 2
 [connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/TrainButton" to="." method="_on_button_toggled"]
 [connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/RailButton" to="." method="_on_button_toggled"]
 [connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/RailButton" to="." method="_on_rail_button_toggled"]
-[connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/StationButton" to="." method="_on_station_button_toggled"]
 [connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/StationButton" to="." method="_on_button_toggled"]
+[connection signal="toggled" from="VBox/HBox/Container/Margin/Buttons/StationButton" to="." method="_on_station_button_toggled"]

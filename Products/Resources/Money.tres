@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Product" load_steps=3 format=3 uid="uid://tiw3j1i51i0l"]
+
+[ext_resource type="Texture2D" uid="uid://bjpta4cdwh1n4" path="res://Products/Textures/Money.png" id="1_lbufh"]
+[ext_resource type="Script" uid="uid://djt3f2oxburea" path="res://Products/Product.gd" id="1_v8ojo"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_v8ojo")
+name = "Money"
+product_icon = ExtResource("1_lbufh")
+always_produce = false
+production_speed = 0.2
+product_color = Color(0.996078, 0.905882, 0.380392, 1)
+max_amount = 16
+metadata/_custom_type_script = "uid://djt3f2oxburea"

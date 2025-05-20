@@ -3,7 +3,7 @@ extends Control
 @onready var train_button = $VBox/HBox/Container/Margin/Buttons/TrainButton
 @onready var rail_button = $VBox/HBox/Container/Margin/Buttons/RailButton
 @onready var station_button = $VBox/HBox/Container/Margin/Buttons/StationButton
-
+@onready var money_label = $VBox/MoneyControl/MoneyLabel
 
 signal train_button_pressed
 signal rail_button_pressed
@@ -37,3 +37,6 @@ func deselected_button():
 	train_button.button_pressed = false
 	rail_button.button_pressed = false
 	station_button.button_pressed = false
+
+func update_money_ui(amount):
+	money_label.text = str(amount)

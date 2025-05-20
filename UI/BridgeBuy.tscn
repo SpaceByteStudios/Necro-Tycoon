@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvki0v5xqd8cu"]
+
+[ext_resource type="Script" uid="uid://d2th3ucpu1ows" path="res://UI/bridge_buy.gd" id="1_fn8ih"]
+[ext_resource type="Texture2D" uid="uid://kcohi58plb8j" path="res://UI/BackgroundUI.png" id="1_j2y35"]
+[ext_resource type="Theme" uid="uid://bdyp4ey6ubwxi" path="res://UI/buy_button.tres" id="2_j5l5u"]
+[ext_resource type="FontFile" uid="uid://dyvu7ridfyt4k" path="res://Fonts/AcPlus_IBM_BIOS.ttf" id="3_v8fub"]
+
+[node name="BridgeBuy" type="Control"]
+layout_mode = 3
+offset_left = -16.0
+offset_top = -8.0
+offset_right = -16.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(16, 8)
+mouse_filter = 2
+script = ExtResource("1_fn8ih")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 16.0
+texture = ExtResource("1_j2y35")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 16.0
+theme = ExtResource("2_j5l5u")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 16.0
+theme_override_fonts/font = ExtResource("3_v8fub")
+theme_override_font_sizes/font_size = 9
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

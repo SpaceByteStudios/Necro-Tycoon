@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Product" load_steps=3 format=3 uid="uid://c4wtoqhasiq5f"]
+
+[ext_resource type="Script" uid="uid://djt3f2oxburea" path="res://Products/Product.gd" id="1_53dj4"]
+[ext_resource type="Texture2D" uid="uid://dmq13en1fodhp" path="res://Products/Textures/Skeleton.png" id="1_y8egd"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_53dj4")
+name = "Skeleton"
+product_icon = ExtResource("1_y8egd")
+always_produce = true
+production_speed = 0.2
+product_color = Color(0.227451, 0.266667, 0.4, 1)
+max_amount = 16
+metadata/_custom_type_script = "uid://djt3f2oxburea"

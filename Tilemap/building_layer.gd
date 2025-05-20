@@ -1,7 +1,7 @@
 extends TileMapLayer
 class_name BuildingLayer
 
-@export var product_array : Array[ProductType]
+@export var product_array : Array[Product]
 
 func has_building_neighbors(map_pos):
 	var cells = get_surrounding_cells(map_pos)
@@ -99,22 +99,6 @@ func get_building_accepts(map_pos):
 			return product_array[5]
 		"Weapon":
 			return product_array[6]
-
-func set_building_id(map_pos, id):
-	var tile_data = get_cell_tile_data(map_pos)
-	
-	if tile_data == null:
-		return
-	
-	tile_data.set_custom_data("MarkerID", id)
-
-func get_building_id(map_pos):
-	var tile_data = get_cell_tile_data(map_pos)
-	
-	if tile_data == null:
-		return
-	
-	return tile_data.get_custom_data("MarkerID")
 
 func get_map_pos(global_pos):
 	var local_rail = to_local(global_pos)

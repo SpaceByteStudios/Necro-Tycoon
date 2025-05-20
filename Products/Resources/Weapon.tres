@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Product" load_steps=3 format=3 uid="uid://dqd6a7u5i1g2e"]
+
+[ext_resource type="Texture2D" uid="uid://dldeiwruuaf64" path="res://Products/Textures/Weapon.png" id="1_1xyps"]
+[ext_resource type="Script" uid="uid://djt3f2oxburea" path="res://Products/Product.gd" id="1_mdc0e"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_mdc0e")
+name = "Weapon"
+product_icon = ExtResource("1_1xyps")
+always_produce = false
+production_speed = 0.05
+product_color = Color(0.996078, 0.682353, 0.203922, 1)
+max_amount = 16
+metadata/_custom_type_script = "uid://djt3f2oxburea"

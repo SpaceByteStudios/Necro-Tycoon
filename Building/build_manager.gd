@@ -8,9 +8,14 @@ extends Node2D
 
 @onready var train_scene = preload('res://Train/train.tscn')
 
+@export var ground_layer : GroundLayer
 @export var rail_layer : RailLayer
 @export var building_layer : BuildingLayer
 @export var station_manager : StationManager
+@export var money_manager : MoneyManager
+
+@export var train_cost = 10
+@export var rail_cost = 1
 
 enum BuildState{
 	NONE,
@@ -78,6 +83,11 @@ func placing_train():
 		return
 	
 	if Input.is_action_just_pressed('Place'):
+		var enough_money = money_manager.has_enough_money(train_cost)
+		if !enough_money:
+			return
+		
+		money_manager.pay_money(train_cost)
 		var train : Train = train_scene.instantiate()
 		train.global_position = tile_pos
 		train.train_id = train_index
@@ -99,7 +109,9 @@ func placing_rail():
 	var map_pos = get_mouse_map_pos()
 	
 	var building_data = building_layer.get_cell_tile_data(map_pos)
-	if building_data != null:
+	var is_river = ground_layer.is_cell_river(map_pos)
+	
+	if building_data != null || is_river:
 		rail_sprite.modulate = Color(Color.WHITE, 0.0)
 		return
 	
@@ -110,10 +122,26 @@ func placing_rail():
 	rail_sprite.global_position = tile_pos
 	
 	if Input.is_action_pressed('Place'):
+		var cell = rail_layer.get_cell_source_id(cells[0])
+		
+		if cell != -1:
+			return
+		
+		var enough_money = money_manager.has_enough_money(rail_cost)
+		if !enough_money:
+			return
+		
+		money_manager.pay_money(rail_cost)
 		rail_layer.set_cells_terrain_connect(cells, 0, 0)
 	
 	if Input.is_action_pressed('Remove'):
-		rail_layer.set_cells_terrain_connect(cells, 0, -1)
+		var is_bridge = rail_layer.is_a_bridge(cells[0])
+		
+		if is_bridge == null:
+			return
+		
+		if !is_bridge:
+			rail_layer.set_cells_terrain_connect(cells, 0, -1)
 
 func placing_station():
 	var map_pos = get_mouse_map_pos()
@@ -157,4 +185,12 @@ func placing_station():
 func get_mouse_map_pos():
 	var mouse_pos = get_global_mouse_position()
 	return rail_layer.get_map_pos(mouse_pos)
+
+func _on_buy_bridge_button(button : Control):
+	var enough_money = money_manager.has_enough_money(button.cost_amount)
 	
+	if enough_money:
+		money_manager.pay_money(button.cost_amount)
+		var map_pos = button.map_pos
+		rail_layer.build_bridge(map_pos)
+		button.queue_free()

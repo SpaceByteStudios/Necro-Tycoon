@@ -71,9 +71,9 @@ texture = ExtResource("3_ftc4i")
 z_index = 1
 position = Vector2(-4, 0)
 emitting = false
-amount = 32
+amount = 24
 texture = ExtResource("4_ye6r3")
-lifetime = 0.7
+lifetime = 0.4
 process_material = SubResource("ParticleProcessMaterial_ye6r3")
 
 [connection signal="input_event" from="Engine/Clickable" to="." method="_on_clickable_input_event"]

@@ -14,11 +14,14 @@ enum Mode{
 	SIGNS
 }
 
-var mode = Mode.NONE
+var mode = Mode.MARKERS
+
+var markers_dict : Dictionary[Vector2i, int]
+
 var markers_array : Array[StationMarker]
 
 func _ready() -> void:
-	markers.visible = false
+	markers.visible = true
 	signs.visible = false
 	
 	var building_cells = building_layer.get_building_cells()
@@ -29,13 +32,13 @@ func _ready() -> void:
 		
 		var marker : StationMarker = marker_scene.instantiate()
 		marker.global_position = pos
-		building_layer.set_building_id(building_cells[i], i)
+		markers_dict.set(building_cells[i], i)
 		marker.production = building_layer.get_building_production(building_cells[i])
 		marker.accepts = building_layer.get_building_accepts(building_cells[i])
 		markers.add_child(marker)
-		markers_array.append(marker)
+		markers_array.push_back(marker)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed('Switch Mode'):
 		match mode:
 			Mode.NONE:
@@ -57,5 +60,5 @@ func get_cell_pos(pos):
 
 func get_station_marker(map_pos):
 	var building_cell = building_layer.get_building_neighbor(map_pos)
-	var marker_id = building_layer.get_building_id(building_cell)
+	var marker_id = markers_dict.get(building_cell)
 	return markers_array[marker_id]
